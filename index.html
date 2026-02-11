@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MYLOVE 💖 My Valentine</title>
+<title>Jaylyn 💖 My Valentine</title>
 
 <style>
 body{
@@ -94,7 +94,7 @@ button{
 <body>
 
 <div class="card" id="card">
-<h1>Hi MAHAL KO 💕</h1>
+<h1>Hi Jaylyn 💕</h1>
 <p>
 I made this just for you 🥺<br><br>
 Will you be my Valentine?
@@ -116,7 +116,7 @@ const card = document.getElementById("card");
 
 let attempts=0;
 
-/* 🎵 MUSIC (opens YouTube directly – 100% works) */
+/* 🎵 MUSIC (opens YouTube directly – works on mobile) */
 function playMusic(){
     window.open("https://youtu.be/GYccGtoSqx8","_blank");
 }
@@ -127,8 +127,8 @@ yesBtn.onclick=()=>{
     playMusic(); // opens once
 
     card.innerHTML=`
-        <h1>I LOVE YOU SO MUCH MAHAL💖</h1>
-        <p>MWUAA MWUAA!!!</p>
+        <h1>She said YES!! 😭💖</h1>
+        <p>Best day ever fr fr</p>
         <div id="loveText"></div>
     `;
 
@@ -138,7 +138,6 @@ yesBtn.onclick=()=>{
     startTypewriter();
     startSlideshow();
 };
-
 
 /* 😂 NO MULTIPLIES */
 function multiplyNo(){
@@ -172,7 +171,6 @@ setTimeout(()=>h.remove(),6000);
 },300);
 }
 
-
 /* 🎊 CONFETTI */
 function confetti(){
 for(let i=0;i<120;i++){
@@ -184,7 +182,6 @@ document.body.appendChild(c);
 setTimeout(()=>c.remove(),3000);
 }
 }
-
 
 /* 🎆 FIREWORKS */
 function fireworks(){
@@ -198,7 +195,6 @@ setTimeout(()=>f.remove(),3000);
 }
 }
 
-
 /* ✨ TYPEWRITER LOVE MESSAGE */
 function startTypewriter(){
 const text="I love you so much always and for the rest of our life 💖";
@@ -211,9 +207,24 @@ i++;
 if(i>=text.length) clearInterval(typing);
 },60);
 }
+
+/* 📸 SLIDESHOW */
+const photos=["pic1.jpg","pic2.jpg","pic3.jpg"];
+
+function startSlideshow(){
+const box=document.getElementById("slideshow");
+const img=document.getElementById("slideImg");
+
+box.style.display="block";
+let i=0;
+
+setInterval(()=>{
+i=(i+1)%photos.length;
+img.src=photos[i];
+},2000);
+}
 </script>
 
 </body>
 </html>
-
 
