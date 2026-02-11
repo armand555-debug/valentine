@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MYLOVE 💖 My Valentine</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins,sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffc1cc,#ff69b4);
+    overflow:hidden;
+    text-align:center;
+}
+
+/* card */
+.card{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    max-width:360px;
+    z-index:5;
+}
+
+/* buttons */
+button{
+    padding:12px 25px;
+    margin:8px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#yesBtn{ background:#ff2e78; color:white; }
+#noBtn{ background:#ddd; position:relative; }
+
+/* hearts */
+.heart{
+    position:absolute;
+    font-size:22px;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    to{ transform:translateY(-110vh); opacity:0; }
+}
+
+/* confetti + fireworks */
+.confetti,.fire{
+    position:fixed;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    top:-10px;
+    animation:fall 3s linear forwards;
+}
+@keyframes fall{
+    to{ transform:translateY(100vh) rotate(720deg); opacity:0; }
+}
+
+/* slideshow */
+#slideshow{
+    position:fixed;
+    bottom:10px;
+    width:200px;
+    height:200px;
+    border-radius:20px;
+    overflow:hidden;
+    display:none;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+#slideshow img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* typewriter */
+#loveText{
+    margin-top:20px;
+    font-size:20px;
+    color:#ff2e78;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+<h1>Hi MAHAL KO 💕</h1>
+<p>
+I made this just for you 🥺<br><br>
+Will you be my Valentine?
+</p>
+
+<button id="yesBtn">YES 💖</button>
+<button id="noBtn">No 😅</button>
+</div>
+
+<!-- slideshow -->
+<div id="slideshow">
+    <img id="slideImg" src="pic1.jpg">
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const card = document.getElementById("card");
+
+let attempts=0;
+
+/* 🎵 MUSIC (opens YouTube directly – 100% works) */
+function playMusic(){
+    window.open("https://youtu.be/GYccGtoSqx8","_blank");
+}
+
+/* 💖 YES CLICKED */
+yesBtn.onclick=()=>{
+
+    playMusic(); // opens once
+
+    card.innerHTML=`
+        <h1>I LOVE YOU SO MUCH MAHAL💖</h1>
+        <p>MWUAA MWUAA!!!</p>
+        <div id="loveText"></div>
+    `;
+
+    hearts();
+    confetti();
+    fireworks();
+    startTypewriter();
+    startSlideshow();
+};
+
+
+/* 😂 NO MULTIPLIES */
+function multiplyNo(){
+    attempts++;
+
+    for(let i=0;i<3;i++){
+        const clone=noBtn.cloneNode(true);
+        clone.style.position="absolute";
+        clone.style.left=Math.random()*80+"vw";
+        clone.style.top=Math.random()*80+"vh";
+        clone.onclick=multiplyNo;
+        document.body.appendChild(clone);
+    }
+
+    if(attempts>4){
+        document.querySelectorAll("#noBtn").forEach(b=>b.remove());
+    }
+}
+noBtn.onclick=multiplyNo;
+
+
+/* 💕 HEARTS */
+function hearts(){
+setInterval(()=>{
+const h=document.createElement("div");
+h.innerHTML="💖";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},300);
+}
+
+
+/* 🎊 CONFETTI */
+function confetti(){
+for(let i=0;i<120;i++){
+const c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background=`hsl(${Math.random()*360},100%,70%)`;
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),3000);
+}
+}
+
+
+/* 🎆 FIREWORKS */
+function fireworks(){
+for(let i=0;i<200;i++){
+const f=document.createElement("div");
+f.className="fire";
+f.style.left=Math.random()*100+"vw";
+f.style.background=`hsl(${Math.random()*360},100%,60%)`;
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),3000);
+}
+}
+
+
+/* ✨ TYPEWRITER LOVE MESSAGE */
+function startTypewriter(){
+const text="I love you so much always and for the rest of our life 💖";
+let i=0;
+const el=document.getElementById("loveText");
+
+const typing=setInterval(()=>{
+el.innerHTML+=text[i];
+i++;
+if(i>=text.length) clearInterval(typing);
+},60);
+}
+</script>
+
+</body>
+</html>
+
+
